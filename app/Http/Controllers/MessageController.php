@@ -60,16 +60,18 @@ class MessageController extends Controller
         //     'content' => 'required|min:10'
         // ]);
         $validated = $request->validated();
-        $message = new ChatMessage();
-        // $message->user_handle = $request->input('user_handle');
-        // $message->content = $request->input('content');
-        $message->user_handle = $validated['user_handle'];
-        $message->content = $validated['content'];
-        $message->save();
+
+        // $message = new ChatMessage();
+        // // $message->user_handle = $request->input('user_handle');
+        // // $message->content = $request->input('content');
+        // $message->user_handle = $validated['user_handle'];
+        // $message->content = $validated['content'];
+        // $message->save();
+        $newMessage = ChatMessage::create($validated);
 
         $request->session()->flash('status', 'The message was created!');
 
-        return redirect()->route('messages.show', ['message' => $message->id]);
+        return redirect()->route('messages.show', ['message' => $newMessage->id]);
     }
 
     /**
