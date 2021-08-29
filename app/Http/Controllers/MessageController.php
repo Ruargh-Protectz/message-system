@@ -53,7 +53,17 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $request->validate([
+            'user_handle' => 'bail|required|min:5|max:32',
+            'content' => 'required|min:10'
+        ]);
+        // dd($request);
+        $message = new ChatMessage();
+        $message->user_handle = $request->input('user_handle');
+        $message->content = $request->input('content');
+        $message->save();
+
+        return redirect()->route('messages.show', ['message' => $message->id]);
     }
 
     /**
