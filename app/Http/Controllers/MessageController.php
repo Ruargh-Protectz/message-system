@@ -2,27 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChatMessage;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    private $messages = [
-        1 => [
-            'user' => 'User1',
-            'content' => 'Message 1 from User 1',
-            'is_new' => true,
-        ],
-        2 => [
-            'user' => 'User2',
-            'content' => 'Message 1 from User 2',
-            'is_new' => true,
-        ],
-        3 => [
-            'user' => 'User1',
-            'content' => 'Message 2 from User 1',
-            'is_new' => true,
-        ]
-    ];
+    // private $messages = [
+    //     1 => [
+    //         'user_handle' => 'User1',
+    //         'content' => 'Message 1 from User 1',
+    //         'is_new' => true,
+    //     ],
+    //     2 => [
+    //         'user_handle' => 'User2',
+    //         'content' => 'Message 1 from User 2',
+    //         'is_new' => true,
+    //     ],
+    //     3 => [
+    //         'user_handle' => 'User1',
+    //         'content' => 'Message 2 from User 1',
+    //         'is_new' => true,
+    //     ]
+    // ];
 
     /**
      * Display a listing of the resource.
@@ -31,7 +32,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return view('messages.index', ['messages' => $this->messages]);
+        return view('messages.index', ['messages' => ChatMessage::all()]);
     }
 
     /**
@@ -63,8 +64,9 @@ class MessageController extends Controller
      */
     public function show($id)
     {
-        abort_if(!isset($this->messages[$id]), 404);
-        return view('messages.show', ['message' => $this->messages[$id]]);
+        // abort_if(!isset($this->messages[$id]), 404);
+        // return view('messages.show', ['message' => $this->messages[$id]]);
+        return view('messages.show', ['message' => ChatMessage::findOrFail($id)]);
     }
 
     /**

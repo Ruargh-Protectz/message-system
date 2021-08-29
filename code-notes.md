@@ -6,7 +6,7 @@
 [MarkDown Guide](https://www.markdownguide.org/basic-syntax).
 
 php artisan migrate
-php artisan make:model MessageModel -m
+php artisan make:model ChatMessage -m
 
 php artisan tinker
 User::factory()->count(5)->create();
