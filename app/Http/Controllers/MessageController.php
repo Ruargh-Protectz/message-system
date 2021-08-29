@@ -63,7 +63,8 @@ class MessageController extends Controller
      */
     public function show($id)
     {
-        //
+        abort_if(!isset($this->messages[$id]), 404);
+        return view('messages.show', ['message' => $this->messages[$id]]);
     }
 
     /**

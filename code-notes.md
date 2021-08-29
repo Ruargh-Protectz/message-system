@@ -4,3 +4,10 @@
 ## References
 [Icons](https://icons8.com/icon/set/messaging/plasticine).
 [MarkDown Guide](https://www.markdownguide.org/basic-syntax).
+
+php artisan migrate
+php artisan make:model MessageModel -m
+
+php artisan tinker
+User::factory()->count(5)->create();
+User::where('id', '>=', 2)->orderBy('id', 'desc')->get();
