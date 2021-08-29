@@ -11,3 +11,6 @@ php artisan make:model ChatMessage -m
 php artisan tinker
 User::factory()->count(5)->create();
 User::where('id', '>=', 2)->orderBy('id', 'desc')->get();
+
+// specialised validation
+php artisan make:request StoreMessage

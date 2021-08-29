@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMessage;
 use App\Models\ChatMessage;
 use Illuminate\Http\Request;
 
@@ -51,16 +52,19 @@ class MessageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMessage $request)
     {
-        $request->validate([
-            'user_handle' => 'bail|required|min:5|max:32',
-            'content' => 'required|min:10'
-        ]);
         // dd($request);
+        // $request->validate([
+        //     'user_handle' => 'bail|required|min:5|max:32',
+        //     'content' => 'required|min:10'
+        // ]);
+        $validated = $request->validated();
         $message = new ChatMessage();
-        $message->user_handle = $request->input('user_handle');
-        $message->content = $request->input('content');
+        // $message->user_handle = $request->input('user_handle');
+        // $message->content = $request->input('content');
+        $message->user_handle = $validated['user_handle'];
+        $message->content = $validated['content'];
         $message->save();
 
         return redirect()->route('messages.show', ['message' => $message->id]);
