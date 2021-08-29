@@ -5,11 +5,11 @@
 @section('content')
     <form action="{{ route('messages.store') }}" method="POST">
         @csrf
-        <div><input type="text" name="user_handle"></div>
+        <div><input type="text" name="user_handle" value="{{ old('user_handle') }}"></div>
         @error('user_handle')
             <div>{{ $message }}</div>
         @enderror
-        <div><textarea name="content"></textarea></div>
+        <div><textarea name="content">{{ old('content') }}</textarea></div>
         @if($errors->any())
             <div>
                 <ul>
