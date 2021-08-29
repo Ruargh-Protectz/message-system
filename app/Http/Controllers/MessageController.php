@@ -67,6 +67,8 @@ class MessageController extends Controller
         $message->content = $validated['content'];
         $message->save();
 
+        $request->session()->flash('status', 'The message was created!');
+
         return redirect()->route('messages.show', ['message' => $message->id]);
     }
 
