@@ -19,3 +19,10 @@ php artisan make:request StoreMessage
 // show old values when editing form fields
 <div><input type="text" name="title" value="{{ old('title', optional($post ?? null)->title) }}"></div>
 
+// method spoofing for form action + CSRF
+    <form action="{{ route('messages.update', ['message' => $message->id]) }}" method="POST">
+        @csrf
+        @method('PUT')
+        ...
+    </form>
+

@@ -92,6 +92,11 @@ class MessageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = ChatMessage::findOrFail($id);
+        $post->delete();
+
+        session()->flash('status', 'Message deleted.');
+
+        return redirect()->route('messages.index');
     }
 }

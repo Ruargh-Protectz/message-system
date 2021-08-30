@@ -5,10 +5,4 @@
     </div>
 </div>
 @extends('layouts.partials.message-actions')
-<footer>
-    @if(session('status'))
-        <div style="width:100%; position:fixed; bottom:0%; height:40px; background:red; color:white;">
-            {{ session('status') }}
-        </div>
-    @endif
-</footer>
+@include('layouts.partials.footer')
