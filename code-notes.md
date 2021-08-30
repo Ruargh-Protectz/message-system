@@ -26,3 +26,14 @@ php artisan make:request StoreMessage
         ...
     </form>
 
+### Load Laravel UI / Bootstrap
+composer require laravel/ui 3.0.0
+php artisan ui bootstrap
+php artisan ui:controllers
+npm install
+npm run dev
+
+### Auth
+php artisan ui bootstrap --auth
+npm install && npm run dev
+npm install && npm run dev
