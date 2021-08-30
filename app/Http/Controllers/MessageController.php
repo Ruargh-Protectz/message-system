@@ -8,23 +8,6 @@ use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    // private $messages = [
-    //     1 => [
-    //         'user_handle' => 'User1',
-    //         'content' => 'Message 1 from User 1',
-    //         'is_new' => true,
-    //     ],
-    //     2 => [
-    //         'user_handle' => 'User2',
-    //         'content' => 'Message 1 from User 2',
-    //         'is_new' => true,
-    //     ],
-    //     3 => [
-    //         'user_handle' => 'User1',
-    //         'content' => 'Message 2 from User 1',
-    //         'is_new' => true,
-    //     ]
-    // ];
 
     /**
      * Display a listing of the resource.
@@ -54,24 +37,10 @@ class MessageController extends Controller
      */
     public function store(StoreMessage $request)
     {
-        // dd($request);
-        // $request->validate([
-        //     'user_handle' => 'bail|required|min:5|max:32',
-        //     'content' => 'required|min:10'
-        // ]);
         $validated = $request->validated();
-
-        // $message = new ChatMessage();
-        // // $message->user_handle = $request->input('user_handle');
-        // // $message->content = $request->input('content');
-        // $message->user_handle = $validated['user_handle'];
-        // $message->content = $validated['content'];
-        // $message->save();
-        $newMessage = ChatMessage::create($validated);
-
-        $request->session()->flash('status', 'The message was created!');
-
-        return redirect()->route('messages.show', ['message' => $newMessage->id]);
+        $message = ChatMessage::create($validated);
+        $request->session()->flash('status', 'Message created.');
+        return redirect()->route('messages.show', ['message' => $message->id]);
     }
 
     /**
@@ -82,8 +51,6 @@ class MessageController extends Controller
      */
     public function show($id)
     {
-        // abort_if(!isset($this->messages[$id]), 404);
-        // return view('messages.show', ['message' => $this->messages[$id]]);
         return view('messages.show', ['message' => ChatMessage::findOrFail($id)]);
     }
 
@@ -95,7 +62,7 @@ class MessageController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('messages.edit', ['message' => ChatMessage::findOrFail($id)]);
     }
 
     /**
@@ -105,9 +72,16 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreMessage $request, $id)
     {
-        //
+        $message = ChatMessage::findOrFail($id); // check exist and retrieve or return 404
+        $validated = $request->validated();
+        $message->fill($validated);
+        $message->save();
+
+        $request->session()->flash('status', 'Message updated.');
+
+        return redirect()->route('messages.show', ['message' => $message->id]);
     }
 
     /**

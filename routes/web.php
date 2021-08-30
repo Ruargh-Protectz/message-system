@@ -22,4 +22,5 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::resource('messages', MessageController::class);
+Route::resource('messages', MessageController::class)
+    ->only(['index', 'show', 'create', 'store', 'edit', 'update']);
