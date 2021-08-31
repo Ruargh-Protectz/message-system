@@ -6,9 +6,23 @@
     <form action="{{ route('messages.store') }}" method="POST">
         @csrf
         <div class="">
-            <label for="user_handle">User Handle</label>
+            <label for="user_handle">User</label>
+
+            {{-- <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="usr_handle" type="text" name="user_handle" value="{{ old('user_handle') }}"></div> --}}
+
+            @guest
+
             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="usr_handle" type="text" name="user_handle" value="{{ old('user_handle') }}"></div>
+            id="usr_handle" type="text" name="user_handle" value="Anonymous" readonly="readonly" ></div>
+
+            @else
+
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="usr_handle" type="text" name="user_handle" value="{{ Auth::user()->name }}" readonly="readonly" ></div>
+
+            @endguest
+
         @error('user_handle')
             <div>{{ $message }}</div>
         @enderror
