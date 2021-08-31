@@ -34,12 +34,12 @@
 
             <div class="flex justify-center pt-8 sm:justify-end sm:pt-0">
                 <nav class="">
-                    <a class="text-gray-900 dark:text-white px-8" href="{{ route('messages.index') }}">View Messages</a>
-                    <a class="text-gray-900 dark:text-white px-8" href="{{ route('messages.create') }}">Send Message</a>
+                    <a class="text-gray-900 dark:text-white px-8" href="{{ route('messages.index') }}">View Messages | </a>
+                    <a class="text-gray-900 dark:text-white px-8" href="{{ route('messages.create') }}">Send Message | </a>
 
                     @guest
                         @if (Route::has('register'))
-                            <a class="text-gray-900 dark:text-white px-8" href="{{ route('register') }}">Register</a>
+                            <a class="text-gray-900 dark:text-white px-8" href="{{ route('register') }}">Register | </a>
                         @endif
                             <a class="text-gray-900 dark:text-white px-8" href="{{ route('login') }}">Login</a>
                     @else
