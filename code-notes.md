@@ -59,3 +59,7 @@ npm install && npm run dev
             @csrf
         </form>
 @endguest`
+
+
+### Check if user authenticated
+`use Illuminate\Support\Facades\Auth;`
