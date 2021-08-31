@@ -37,3 +37,25 @@ npm run dev
 php artisan ui bootstrap --auth
 npm install && npm run dev
 npm install && npm run dev
+
+### Manual Auth
+1. wep.php > add Auth:routes();
+2. Create views
+
+
+### pattern to add logout button dummy form submit
+`@guest
+    @if (Route::has('register'))
+        <a class="p-2 text-dark" href="{{ route('register') }}">Register</a>
+    @endif
+        <a class="p-2 text-dark" href="{{ route('login') }}">Login</a>
+@else
+        <a class="p-2 text-dark" href="{{ route('logout') }}"
+        onclick="event.preventDefault();document.getElementById('logout-form').submit()"
+        >Logout</a>
+
+        <form id="logout-form" action={{ route('logout') }} method="POST"
+            style="display: none;">
+            @csrf
+        </form>
+@endguest`
