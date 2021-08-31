@@ -40,7 +40,8 @@ class MessageController extends Controller
         $validated = $request->validated();
         $message = ChatMessage::create($validated);
         $request->session()->flash('status', 'Message created.');
-        return redirect()->route('messages.show', ['message' => $message->id]);
+        // return redirect()->route('messages.show', ['message' => $message->id]);
+        return redirect()->route('messages.index');
     }
 
     /**
@@ -81,7 +82,8 @@ class MessageController extends Controller
 
         $request->session()->flash('status', 'Message updated.');
 
-        return redirect()->route('messages.show', ['message' => $message->id]);
+        // return redirect()->route('messages.show', ['message' => $message->id]);
+        return redirect()->route('messages.index');
     }
 
     /**
